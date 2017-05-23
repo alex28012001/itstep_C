@@ -146,6 +146,7 @@ Source.cpp
 #include<string>
 
 
+
 int main()
 {
 
@@ -197,13 +198,8 @@ int main()
 	a.setn_g(group);
 	a.getn_g();
 	a.printl(group);
-	
+	std::cout << "\n\n";
 
-
-
-
-
-	
 	
 
 
