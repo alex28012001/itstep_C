@@ -1,0 +1,212 @@
+Students.h
+
+
+
+
+
+#pragma once
+#include<iostream>
+#include<string>
+
+class Students
+{
+	std::string fio = "";
+	std::string years = "";
+	std::string phone = "";
+	std::string city = "";
+	std::string school = "";
+	std::string n_g = "";
+
+
+
+public:
+	Students() {};
+
+	void printl(std::string la);
+
+	std::string getfio()const;
+	void setfio(std::string name);
+
+	std::string getyears()const;
+	void setyears(std::string n);
+
+	std::string getphone()const;
+	void setphone(std::string tel);
+
+	std::string getcity()const;
+	void setcity(std::string gorod);
+
+	std::string getschool()const;
+	void setschool(std::string sh);
+
+	std::string getn_g()const;
+	void setn_g(std::string group);
+
+
+	
+	~Students() {};
+
+
+};
+
+--------------------------------------------------------------------------------------------------------------------------
+Students.cpp
+
+
+
+
+#include "Students.h"
+
+
+ void Students::printl(std::string la)
+{
+	std::cout << la;
+}
+
+
+std::string Students::getfio()const {
+	return fio;
+};
+
+void Students::setfio(std::string name)
+{
+	fio = name;
+}
+
+
+
+std::string Students::getyears()const
+{
+	return years;
+}
+void Students::setyears(std::string n)
+{
+	years = n;
+}
+
+
+
+
+std::string Students::getphone()const
+{
+	return phone;
+}
+void Students::setphone(std::string tel)
+{
+	phone = tel;
+}
+
+
+
+
+std::string Students::getcity()const
+{
+	return city;
+}
+void Students::setcity(std::string gorod)
+{
+	city = gorod;
+}
+
+
+
+std::string Students::getschool()const
+{
+	return school;
+}
+
+void Students::setschool(std::string sh)
+{
+	school = sh;
+}
+
+
+
+
+std::string Students::getn_g()const
+{
+	return n_g;
+}
+
+void Students::setn_g(std::string group)
+{
+	n_g = group;
+}
+
+
+----------------------------------------------------------------------------------------------------------------------------------
+Source.cpp
+
+
+
+
+
+#include "Students.h"
+#include<iostream>
+#include<string>
+
+
+int main()
+{
+
+	Students a;
+
+
+	std::string tmp;
+	std::cout << "Input fio:";
+	std::cin >> tmp;
+	a.setfio(tmp);
+	a.getfio();
+	a.printl(tmp);
+	std::cout << "\n\n";
+
+
+
+	std::string c;
+	std::cout << "Input years:";
+	std::cin >> c;
+	a.setyears(c);
+	a.getyears();
+	a.printl(c);
+	std::cout << "\n\n";
+
+
+	std::string tel;
+	std::cout << "Input phone:";
+	std::cin >> tel;
+	a.setphone(tel);
+	a.getphone();
+	a.printl(tel);
+	std::cout << "\n\n";
+
+
+	std::string sh;
+	std::cout << "Input school:";
+	std::cin >> sh;
+	a.setschool(sh);
+	a.getschool();
+	a.printl(sh);
+	std::cout << "\n\n";
+
+
+
+
+	std::string group;
+	std::cout << "Input group:";
+	std::cin >> group;
+	a.setn_g(group);
+	a.getn_g();
+	a.printl(group);
+	
+
+
+
+
+
+	
+	
+
+
+	return 0;
+}
+-------------------------------------------------------------------------------------------------------------------------------------
