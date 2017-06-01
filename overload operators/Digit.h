@@ -24,4 +24,9 @@ public:
 		tmp.digit = digit + x;
 		return tmp;
 	}
+
+	bool operator>(const Digit &x)
+	{
+		return digit > x.digit;
+	}
 };
