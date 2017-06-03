@@ -39,8 +39,11 @@ std::string PrettyPrint::concatenation(std::string str1, std::string str2)const
 
 std::string PrettyPrint::substitution(std::string str1)
 {
-	std::string temp = str1;
-	return temp.replace(temp.begin(), temp.end(), 'a', 'o');
+		for (std::string::iterator a = str1.begin(); a != str1.end(); ++a)
+			if (*a == 'a')
+				*a = 'o';
+		return str1;
+
 }
 
 void PrettyPrint :: reverse(char *p)
