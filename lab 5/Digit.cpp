@@ -1,6 +1,7 @@
 #include "Digit.h"
 size_t Digit::counter = 0;
 
+
 int Digit::get_digit()const
 {
 	return digit;
@@ -44,7 +45,7 @@ Digit Digit::operator*(const Digit x)
 	Digit tmp;
 	tmp.digit = digit * x.digit;
 	return tmp;
-	
+
 }
 
 Digit Digit::operator*(const int x)
@@ -90,7 +91,7 @@ bool Digit::operator>(const Digit &x)
 	return digit > x.digit;
 }
 
-bool Digit::operator>( const int x)
+bool Digit::operator>(const int x)
 {
 	return digit > x;
 }
@@ -148,27 +149,27 @@ bool Digit::operator<=(const int x)
 Digit Digit::operator++(int)
 {
 	Digit tmp = *this;
-	tmp.digit++;
+	++digit;
 	return tmp;
 
 }
 
-Digit Digit::operator++()
+Digit& Digit::operator++()
 {
-	digit = digit + 1;
+	++digit;
 	return *this;
 }
 
 Digit Digit::operator--(int)
 {
 	Digit tmp = *this;
-	tmp.digit--;
+	--digit;
 	return tmp;
 }
 
-Digit Digit::operator--( )
+Digit& Digit::operator--()
 {
-	digit = digit + 1;
+	--digit;
 	return *this;
 }
 
@@ -178,7 +179,7 @@ Digit& Digit::operator=(const Digit& x)
 	{
 		return *this;
 	}
-	
+
 	digit = x.digit;
 	return *this;
 }
@@ -189,10 +190,17 @@ Digit& Digit::operator=(Digit&&x)
 	{
 		return *this;
 	}
-	
+
 	digit = x.digit;
 	x.digit = 0;
 	return *this;
-	
+
 }
+
+
+
+
+
+
+
 
