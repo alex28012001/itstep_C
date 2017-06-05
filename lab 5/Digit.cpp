@@ -172,14 +172,24 @@ Digit Digit::operator--( )
 	return *this;
 }
 
-Digit Digit::operator=(const Digit &x)
+Digit& Digit::operator=(const Digit& x)
 {
+	if (this == &x)
+	{
+		return *this;
+	}
+	
 	digit = x.digit;
 	return *this;
 }
 
 Digit Digit::operator=(Digit&&x)
 {
+	if (this == &x)
+	{
+		return *this;
+	}
+	
 	digit = x.digit;
 	x.digit = 0;
 	return *this;
