@@ -183,7 +183,7 @@ Digit& Digit::operator=(const Digit& x)
 	return *this;
 }
 
-Digit Digit::operator=(Digit&&x)
+Digit& Digit::operator=(Digit&&x)
 {
 	if (this == &x)
 	{
