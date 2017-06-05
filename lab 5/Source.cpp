@@ -11,6 +11,8 @@ int main()
 	std::cout << (a > b);
 	std::cout<<Digit::show();
 	
+	a=b;
+	
 	
 
 
