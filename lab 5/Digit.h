@@ -54,7 +54,7 @@ public:
 	Digit operator--(int);
 	Digit operator--();
 	Digit& operator=(const Digit &x);
-	Digit operator=( Digit&&x);
+	Digit& operator=( Digit&&x);
 		
 	
 
