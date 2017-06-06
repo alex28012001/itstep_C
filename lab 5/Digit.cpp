@@ -2,12 +2,12 @@
 size_t Digit::counter = 0;
 
 
-int Digit::get_digit()const
+int Digit::getDigit()const
 {
 	return digit;
 }
 
-void Digit::set_digit(const int x)
+void Digit::setDigit(const int x)
 {
 	digit = x;
 }
@@ -23,6 +23,13 @@ Digit Digit::operator+(const int x)
 {
 	Digit tmp;
 	tmp.digit = digit + x;
+	return tmp;
+}
+
+Digit Digit::operator-()
+{
+	Digit tmp;
+	tmp.digit = -digit;
 	return tmp;
 }
 
@@ -195,6 +202,22 @@ Digit& Digit::operator=(Digit&&x)
 	x.digit = 0;
 	return *this;
 
+}
+
+Digit::operator int()const
+{
+	return digit;
+}
+
+Digit::operator double()const
+{
+
+	return digit;
+}
+
+void Digit::operator()(const int x)
+{
+	digit = x;
 }
 
 
