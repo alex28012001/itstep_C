@@ -1,20 +1,31 @@
 #include "Digit.h"
+#include "Test.h"
+
 #include<iostream>
 int main()
 {
 	Digit a;
 	Digit b(4);
-	std::cout << (a + b).get_digit();
+	Digit c;
+	std::cout << (a + b).getDigit();
 	std::cout << "\n";
-	std::cout << (a + 5).get_digit();
+	std::cout << (a + 5).getDigit();
 	std::cout << "\n";
-	std::cout << (a > b);
-	std::cout<<Digit::show();
+	std::cout << (a > b) << std::endl;
+	std::cout << Digit::getCounter() << std::endl;
+	a = b = c ;
 	
-	a=b;
-	
-	
+	int x = a;
+	std::cout << x;
+	double y = c;
+	std::cout << y << std::endl;
 
+
+	c(1000);
+	std::cout << c.getDigit();
+
+	
+	Test::test();
 
 
 	return 0;
