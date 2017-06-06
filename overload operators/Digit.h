@@ -1,32 +1,67 @@
 #pragma once
+#include<iostream>
 class Digit
 {
 	int digit;
+	static size_t counter;
 
 
 public:
-	Digit():digit(1) {};
-	explicit Digit(const int x) :digit(x) {};
-	int get_digit()const;
 
-	~Digit() {};
-
-	Digit operator+(const Digit x)
+	Digit() :digit(1) { ++counter; };
+	explicit Digit(const int x) :digit(x) { ++counter; };
+	explicit Digit(double x) :digit((int)x) { ++counter; };
+	Digit(Digit &a) : digit(a.digit) { ++counter; };
+	Digit(Digit &&a) : digit(a.digit)
 	{
-		Digit tmp;
-		tmp.digit = digit + x.digit;
-		return tmp;
-	}
+		a.digit = 0;
+		++counter;
+	};
+	int getDigit()const;
+	void setDigit(const int x);
+	~Digit() { --counter; };
 
-	Digit operator+(const int x)
-	{
-		Digit tmp;
-		tmp.digit = digit + x;
-		return tmp;
-	}
 
-	bool operator>(const Digit &x)
+
+	static size_t getCounter()
 	{
-		return digit > x.digit;
+		return counter;
 	}
+	Digit operator+(const Digit x);
+	Digit operator+(const int x);
+	Digit operator-();
+	Digit operator-(const Digit x);
+	Digit operator-(const int x);
+	Digit operator*(const Digit x);
+	Digit operator*(const int x);
+	Digit operator/(const Digit x);
+	Digit operator/(const int x);
+	Digit operator%(const Digit x);
+	Digit operator%(const int x);
+	bool operator>(const Digit &x);
+	bool operator>(const int x);
+	bool operator<(const Digit &x);
+	bool operator<(const int x);
+	bool operator==(const Digit &x);
+	bool operator==(const int x);
+	bool operator!=(const Digit &x);
+	bool operator!=(const int x);
+	bool operator>=(const Digit &x);
+	bool operator>=(const int x);
+	bool operator<=(const Digit &x);
+	bool operator<=(const int x);
+	Digit operator++(int);
+	Digit& operator++();
+	Digit operator--(int);
+	Digit& operator--();
+	Digit& operator=(const Digit &x);
+	Digit& operator=(Digit&&x);
+	operator int()const;
+	operator double()const;
+	void operator()(const int x);
+	
+
+
+
+
 };
