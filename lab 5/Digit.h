@@ -17,18 +17,19 @@ public:
 		a.digit = 0;
 		++counter;
 	};
-	int get_digit()const;
-	void set_digit(const int x);
+	int getDigit()const;
+	void setDigit(const int x);
 	~Digit() { --counter; };
 
 
 
-	static size_t show()
+	static size_t getCounter()
 	{
 		return counter;
 	}
 	Digit operator+(const Digit x);
 	Digit operator+(const int x);
+	Digit operator-();
 	Digit operator-(const Digit x);
 	Digit operator-(const int x);
 	Digit operator*(const Digit x);
@@ -55,6 +56,10 @@ public:
 	Digit& operator--();
 	Digit& operator=(const Digit &x);
 	Digit& operator=(Digit&&x);
+	operator int()const;
+	operator double()const;
+	void operator()(const int x);
+	
 
 
 
