@@ -204,21 +204,7 @@ Digit& Digit::operator=(Digit&&x)
 
 }
 
-Digit::operator int()const
-{
-	return digit;
-}
 
-Digit::operator double()const
-{
-
-	return digit;
-}
-
-void Digit::operator()(const int x)
-{
-	digit = x;
-}
 
 
 
