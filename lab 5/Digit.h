@@ -7,7 +7,6 @@ class Digit
 
 
 public:
-
 	Digit() :digit(1) { ++counter; };
 	explicit Digit(const int x) :digit(x) { ++counter; };
 	explicit Digit(double x) :digit((int)x) { ++counter; };
@@ -20,9 +19,6 @@ public:
 	int getDigit()const;
 	void setDigit(const int x);
 	~Digit() { --counter; };
-
-
-
 	static size_t getCounter()
 	{
 		return counter;
@@ -59,8 +55,6 @@ public:
 	operator int()const;
 	operator double()const;
 	void operator()(const int x);
-	
-
 
 
 
