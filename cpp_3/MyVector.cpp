@@ -38,8 +38,9 @@ void MyVector::push_back(double a)
 
 	}
 
-	else 
+	else
 	{
+
 		double * ptr;
 		ptr = new double[capacity * 2];
 
@@ -48,7 +49,9 @@ void MyVector::push_back(double a)
 			arr[i] = ptr[i];
 		}
 
-		arr[size + 1];	
+		delete[]arr;
+		arr = ptr;
+		arr[size + 1];
 		arr[size] = a;
 
 
@@ -62,7 +65,6 @@ void MyVector::push_back(double a)
 
 double MyVector::pop_back()
 {
-
 	if (!size)std::cout << "Vector is empty!!!";
 	else --size;
 	return arr[size];
@@ -90,8 +92,3 @@ void MyVector::print() const
 	}
 	std::cout << std::endl;
 }
-
-
-
-
-
