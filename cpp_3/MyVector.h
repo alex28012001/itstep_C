@@ -8,7 +8,14 @@ class MyVector
 
 public:
 	MyVector() : size(0), capacity(32) { arr = new double[capacity]; };
-	MyVector(const MyVector &a);
+	MyVector(const MyVector &a) : size(a.size), capacity(a.capacity)
+	{
+		arr = new double[capacity];
+		for (int i = 0; i < size; i++)
+		{
+			arr[i] = a.arr[i];
+		}
+	}
 	bool empty()const;
 	double get_size()const;
 	double get_capacity()const;
