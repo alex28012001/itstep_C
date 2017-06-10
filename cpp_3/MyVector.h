@@ -7,8 +7,22 @@ class MyVector
 	size_t capacity;
 
 public:
-	MyVector() : size(0), capacity(32) { arr = new double[capacity];};
-	MyVector(MyVector &a) 
+	MyVector() : size(0), capacity(32) { arr = new double[capacity]; };
+	MyVector(double arr1[], int size1) :size(size1)
+	{
+		
+		int counter = size1 / 32;
+
+		arr = new double[(counter + 1) * 32];
+		capacity = 32 * (counter + 1);
+
+		for (unsigned int i = 0; i < size; ++i)
+			arr[i] = arr1[i];
+
+	}
+
+
+	MyVector(MyVector &a)
 	{
 		this->size = a.size;
 		this->capacity = a.capacity;
@@ -17,7 +31,7 @@ public:
 		{
 			arr[i] = a.arr[i];
 		}
-	
+
 	};
 
 	bool empty()const;
@@ -34,6 +48,5 @@ public:
 
 
 
-	~MyVector() { delete[]arr;  };
+	~MyVector() { delete[]arr; };
 };
-
