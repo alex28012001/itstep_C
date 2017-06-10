@@ -2,7 +2,7 @@
 #include<iostream>
 
 
-MyVector :: MyVector(MyVector &a)
+MyVector :: MyVector(const MyVector &a)
 {
 	this->size = a.size;
 	this->capacity = a.capacity;
