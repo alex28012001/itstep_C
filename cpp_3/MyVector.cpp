@@ -2,6 +2,17 @@
 #include<iostream>
 
 
+MyVector :: MyVector(MyVector &a)
+{
+	this->size = a.size;
+	this->capacity = a.capacity;
+	arr = new double[capacity];
+	for (int i = 0; i < size; i++)
+	{
+		arr[i] = a.arr[i];
+	}
+};
+
 bool MyVector::empty()const
 {
 	bool flag;
