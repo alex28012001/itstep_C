@@ -31,30 +31,19 @@ double MyVector::get_capacity()const
 
 void MyVector::push_back(double a)
 {
-	if (size < capacity)
-	{
-		arr[size + 1];
-		arr[size] = a;
-
-	}
+	if (size < capacity) 
+		arr[size++] = a;
 
 	else
 	{
-
-		double * ptr;
-		ptr = new double[capacity * 2];
-
-		for (int i = 0; i < size; i++)
-		{
-			arr[i] = ptr[i];
-		}
-
+		double *arr1 = new double[capacity * 2];
+		capacity *= 2;
+		for (unsigned int i = 0; i < size; i++)
+			arr1[i] = arr[i];
 		delete[]arr;
-		arr = ptr;
-		arr[size + 1];
+		arr = arr1;
 		arr[size] = a;
-
-
+		size = size + 1;
 	}
 
 	std::cout << arr[size];
@@ -79,8 +68,7 @@ double& MyVector::at(const int a)
 		return arr[a];
 	}
 
-	else
-		std::cout << "Error";
+	
 }
 
 
