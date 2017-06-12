@@ -92,13 +92,6 @@ T solve(T a, T b)
 	return  b / a;
 }
 
-template<typename T>
-T solve(T a, T b)
-{
-	if (a = 0 && b != 0)
-		return 
-}
-
 
 
 
@@ -112,7 +105,7 @@ int main()
 	sort(arr1, 5);
 	std::cout<<std::endl;
 	std::cout<<find(arr1, 5, 3)<<"\n";
-	std::cout<<solve(1, 5)<<"\n";
+	std::cout<<solve(5, 5)<<"\n";
 
 
 
