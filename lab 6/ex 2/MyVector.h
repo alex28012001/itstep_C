@@ -20,7 +20,7 @@ public:
 			arr[i] = a.arr[i];
 		}
 	}
-	MyVector(MyVector &&a) : size(a.size), capacity(a.capacity)
+	MyVector(MyVector &&a) : size(a.size), capacity(a.capacity), arr(a.arr)
 	{
 		++counter;
 		++realy_counter;
