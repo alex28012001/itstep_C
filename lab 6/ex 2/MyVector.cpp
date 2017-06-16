@@ -177,11 +177,12 @@ MyVector& MyVector:: operator=(MyVector&&a)
 	size = a.size;
 	capacity = a.capacity;
 	delete[] arr;
+	arr = new double[capacity];
 	for (size_t i = 0; i < size; ++i)
 		arr[i] = a.arr[i];
 	a.size = 0;
 	a.capacity = 0;
-	arr = nullptr;
+	a.arr = nullptr;
 
 
 	return *this;
