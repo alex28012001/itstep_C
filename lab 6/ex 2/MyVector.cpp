@@ -157,7 +157,8 @@ MyVector& MyVector::operator=(const MyVector&a)
 	std::cout << "Copy ctor"<<"\n";
 	size = a.size;
 	capacity = a.capacity;
-	arr = new double[size];
+	delete[] arr;
+	arr = new double[a.capacity];
 	for (size_t i = 0; i < size; ++i)
 	{
 		arr[i] = a.arr[i];
@@ -175,11 +176,16 @@ MyVector& MyVector:: operator=(MyVector&&a)
 	std::cout << "Move ctor"<<"\n";
 	size = a.size;
 	capacity = a.capacity;
-
-
+	delete[] arr;
+	for (size_t i = 0; i < size; ++i)
+		arr[i] = a.arr[i];
 	a.size = 0;
 	a.capacity = 0;
 	arr = nullptr;
+
+
+	return *this;
+
 }
 
 
@@ -195,7 +201,7 @@ bool MyVector:: operator==(const MyVector& a)
 	bool flag;
 	if (size == a.size)
 		flag = 1;
-	for (size_t i = 0; i < size;++i)
+	for (size_t i = 0; i < size; ++i)
 	if (arr[i] != a.arr[i])
 		flag = 0;
 
@@ -204,40 +210,48 @@ bool MyVector:: operator==(const MyVector& a)
 
 bool MyVector:: operator!=(const MyVector& a)
 {
-	if (!(*this == a))
-		return true;
-	else
+	if (operator==(a) == true)
 		return false;
+	return true;
 }
 
 bool MyVector:: operator>(const MyVector& a)
 {
-	if (size > a.size)
-		return true;
-	else
-		return false;
+	for (unsigned int i = 0; i < size; ++i)
+	{
+		if (arr[i] > a.arr[i])
+			return true;
+		else if (arr[i] < a.arr[i])
+			return false;
+	}
+	return false;
 }
 
 
 bool MyVector:: operator<(const MyVector& a)
 {
-	if (size < a.size)
-		return true;
-	else
-		return false;
+	for (unsigned int i = 0; i < size; ++i)
+	{
+		if (arr[i] < a.arr[i])
+			return true;
+		else if (arr[i] > a.arr[i])
+			return false;
+	}
+	return false;
 }
 
 bool MyVector:: operator>=(const MyVector& a)
 {
-	if (size >= a.size)
+	if (arr[0] >= a.arr[0])
 		return true;
 	else
-		return false;
+	return false;
+		
 }
 
 bool MyVector:: operator<=(const MyVector& a)
 {
-	if (size <= a.size)
+	if (arr[0] <= a.arr[0])
 		return true;
 	else
 		return false;
