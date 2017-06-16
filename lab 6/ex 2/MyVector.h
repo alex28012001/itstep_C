@@ -26,7 +26,7 @@ public:
 		++realy_counter;
 		a.size = 0;
 		a.capacity = 0;
-		arr = nullptr;
+		a.arr = nullptr;
 	}
 	MyVector(double arr1[], double size1);
 	static int getCounter()
