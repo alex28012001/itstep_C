@@ -15,12 +15,13 @@ auto getMin(const T a, const U b) -> decltype(a + b)
 template<typename T>
 T getMax(const T * arr, const T size)
 {
-
+	T tmp = arr[0];
 	for (size_t i = 0; i < size; ++i)
 	{
-		if (arr[i] > arr[i + 1])
-			return arr[i];
+		if (arr[i] > tmp)
+			tmp = arr[i];
 	}
+	return tmp;
 }
 
 
@@ -29,17 +30,19 @@ T getMax(const T * arr, const T size)
 template<size_t size, typename T>
 T getMax(const T * arr)
 {
+	T tmp = arr[0];
 	for (size_t i = 0; i < size; ++i)
 	{
-		if (arr[i] > arr[i + 1])
-			return arr[i];
+		if (arr[i] > tmp)
+			tmp = arr[i];
 	}
+	return tmp;
 }
 
 
 
 template<typename T>
-void sort( T * A,const T size)
+void sort(T * A, const T size)
 {
 
 
@@ -71,64 +74,75 @@ void sort( T * A,const T size)
 
 
 template<typename T>
-T find(const T * arr, const T size, const T index)
+T find(const T * arr, const T size, const T value)
 {
-	for (size_t i = 0; i < size; ++i)
+	for (int i = 0; i < size; ++i)
 	{
-		if (index != size && size > 0)
-			return arr[index];
-		else
-			return 0;
+		if (arr[i] == value)
+			return i;
+
 	}
+	std::cout << "Number not found!!" << std::endl;
+	return 0;
+		
 }
 
 
 
 
 
-template<typename T>
-T solve(T a, T b)
+
+template<typename T, typename U>
+T* solve(T a, U b)
 {
-	return  b / a;
+	T d[2];
+	if (a == 0)
+	{
+		d[0] = 0;
+		return d;
+	}
+
+	d[0] = 1;
+	d[1] = ((b*-1) / a);
+	return d;
+
 }
+
+
 
 
 
 
 int main()
 {
-	int arr1[] = { 1,5,3,2,4 };
-	
-	std::cout << getMin(15.5, 16) << "\n";
-	std::cout << getMax(arr1, 5)<<"\n";
-	std::cout << getMax<5>(arr1)<<"\n";
+	int arr1[] = { 25,86,23,547,236 };
+
+	std::cout <<"getMin : "<< getMin(15.5, 16) << "\n";
+	std::cout <<"getMax : "<< getMax(arr1, 5) << "\n";
+	std::cout <<"getMax(2) : "<< getMax<5>(arr1) << "\n";
+	std::cout << "Sort : ";
 	sort(arr1, 5);
-	std::cout<<std::endl;
-	std::cout<<find(arr1, 5, 3)<<"\n";
-	std::cout<<solve(5, 5)<<"\n";
+	std::cout << std::endl;
+	std::cout <<"Find : "<< find(arr1, 5, 547) << "\n";
 
 
+	//Solve
+	auto * arr2 = solve(0, 10);
+	if (arr2[0] == 0)
+		std::cout << "OK\n";
+	else
+		std::cout << "Error!\n";
+
+	arr2 = solve(10, 10);
+	if (arr2[1] == -1)
+		std::cout << "OK\n";
+	else
+		std::cout << "Error\n";
+
+	
+	
 
 
 
 	return 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
