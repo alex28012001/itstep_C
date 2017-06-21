@@ -9,11 +9,11 @@ class Stack
 	T top;
 
 public:
-	Stack() : size(0), top(0), maxsize(2) 
+	Stack() : size(0), top(0), maxsize(32)
 	{
 		ptr = new T[maxsize];
 	};
-	
+
 	Stack(const Stack&a) : size(a.size), top(a.top), maxsize(a.maxsize)
 	{
 		std::cout << "Copy constructor\n";
@@ -27,7 +27,7 @@ public:
 	Stack(Stack &&a) : size(a.size), top(a.top), maxsize(a.maxsize)
 	{
 		std::cout << "Move constructor\n";
-		
+
 		ptr = a.ptr;
 		a.maxsize = 0;
 		a.size = 0;
@@ -38,9 +38,9 @@ public:
 	bool empty() const
 	{
 		if (size > 0)
-			return false;
+		return true;
 		else
-			return true;
+			return false;
 	}
 
 	int get_size() const
@@ -52,22 +52,24 @@ public:
 	{
 		if (top < maxsize)
 		{
-			ptr[++top] = value;
+			ptr[size] = value;
+			++size;
+
 		}
 		else
 		{
-		T *arr = new T[maxsize * 2];
-		maxsize *= 2;
+			T *arr = new T[maxsize * 2];
+			maxsize *= 2;
 
-		for (size_t i = 0; i < size; ++i)
-			arr[i] = ptr[i];
+			for (size_t i = 0; i < size; ++i)
+				arr[i] = ptr[i];
 
-		delete[]ptr;
-		ptr = arr;
-		ptr[size] = value;
-		++size;
+			delete[]ptr;
+			ptr = arr;
+			ptr[size] = value;
+			++size;
 		}
-		
+
 
 
 
@@ -75,7 +77,7 @@ public:
 
 	void pop()
 	{
-		if (top >= 0)
+		if (size > 0)
 		{
 			ptr[--top];
 			--size;
@@ -84,12 +86,7 @@ public:
 
 	int get_top()
 	{
-		if (top <= -1)
-		{
-			std::cout << "Error";
-		}
-		else
-			return ptr[top];
+		return ptr[size - 1];	
 	}
 
 	Stack& operator=(const Stack& a)
@@ -103,13 +100,13 @@ public:
 		size = a.size;
 		top = a.top;
 		maxsize = a.maxsize;
-		delete [] ptr;
-		ptr = new T[maxsize];
+		delete[] ptr;
+		ptr = new T[a.maxsize];
 		for (size_t i = 0; i < size; ++i)
 		{
 			ptr[i] = a.ptr[i];
 		}
-		
+
 		return *this;
 	}
 
@@ -120,7 +117,7 @@ public:
 		{
 			return *this;
 		}
-
+		delete[] ptr;
 		size = a.size;
 		top = a.top;
 		maxsize = a.maxsize;
@@ -152,7 +149,6 @@ public:
 			return false;
 		return true;
 	}
-	
-	~Stack() { delete [] ptr; };
-};
 
+	~Stack() { delete[] ptr; };
+};
