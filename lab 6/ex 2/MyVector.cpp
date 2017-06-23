@@ -20,13 +20,7 @@ for (unsigned int i = 0; i < size; ++i)
 
 bool MyVector::empty()const
 {
-	bool flag;
-	if (size <= capacity)
-		flag = true;
-	else
-		flag = false;
-
-	return flag;
+	return size == 0;
 }
 
 
