@@ -5,13 +5,7 @@
 
 bool MyVector::empty()const
 {
-	bool flag;
-	if (size <= capacity)
-		flag = true;
-	else
-		flag = false;
-
-	return flag;
+	return size == 0;
 }
 
 
