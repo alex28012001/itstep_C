@@ -37,10 +37,7 @@ public:
 
 	bool empty() const
 	{
-		if (size > 0)
-		return true;
-		else
-			return false;
+		return size == 0;
 	}
 
 	int get_size() const
