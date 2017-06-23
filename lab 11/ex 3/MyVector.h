@@ -89,13 +89,7 @@ MyVector<T>::MyVector(T arr1[], double size1) : size(size1)
 template<typename T>
 bool MyVector<T>::empty()const
 {
-	bool flag;
-	if (size <= capacity)
-		flag = true;
-	else
-		flag = false;
-
-	return flag;
+	return size == 0;
 }
 
 template<typename T>
