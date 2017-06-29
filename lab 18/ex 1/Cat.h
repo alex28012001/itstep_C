@@ -1,9 +1,15 @@
 #pragma once
 #include"Pet.h"
 #include<string>
-class Cat
+class Cat : public Pet
 {
 public:
-	Cat(){};
-	~Cat(){};
+	Cat() : Pet("Vasy",6,"white","cat") {};
+	void sound()
+	{
+		std::cout << "Meaw meaw meaw\n";
+	}
+
+
+	~Cat() {};
 };
