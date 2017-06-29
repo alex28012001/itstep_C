@@ -3,8 +3,14 @@
 #include<string>
 class Hamster : public Pet
 {
-	std::string name;
 public:
-	Hamster() : name(""){};
-	~Hamster(){};
+	Hamster() : Pet("Homa",2,"black","rodent") {};
+	void sound()
+	{
+		std::cout << "Sh hr sh hr\n";
+	}
+
+
+
+	~Hamster() {};
 };
