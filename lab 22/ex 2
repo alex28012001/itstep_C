@@ -1,0 +1,28 @@
+#include<iostream>
+#include<vector>
+#include<algorithm>
+
+int main()
+{
+	std::vector<int> vec ;
+	for (size_t i = 1; i < 15; ++i)
+		vec.push_back(i);
+
+	auto f = [](int x)
+	{
+		if (x % 10 == 0)
+			return true;
+		else
+			return false;
+	};
+	
+	std::replace_if(vec.begin(), vec.end(),f,11);
+
+	for (auto it : vec)
+		std::cout << it << " ";
+	std::cout << "\n";
+	
+	
+	
+	return 0;
+}
