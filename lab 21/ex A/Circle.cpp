@@ -1,8 +1,14 @@
 #include"Circle.h"
+#include<iostream>
 #define PI 3.14159265  
 
-double Square::getArea()
+double Circle::getArea()
 {
-	return 
+	std::cout << "Area circle: ";
+	return PI * radius * radius;
 }
 
+void Circle::info()
+{
+	std::cout << "r";
+}
