@@ -3,6 +3,19 @@
 #include<cmath>
 #define PI 3.14159265  
 
+void Rectangle::set_d1(const double x)
+{
+	d1 = x;
+}
+void Rectangle::set_d2(const double x)
+{
+	d2 = x;
+}
+void Rectangle::set_angle(const double x)
+{
+	angle = x;
+}
+
 double Rectangle::getArea()
 {
 	std::cout << "Area rectangle: ";
