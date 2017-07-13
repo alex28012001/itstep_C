@@ -6,6 +6,7 @@ class Square : public Rectangle
 	
 public:
 	Square(const double a) : Rectangle(5,10,30),a(a) {};
+	void set_a(const double x);
 	double getArea();
 	void info();
 	~Square() {};
