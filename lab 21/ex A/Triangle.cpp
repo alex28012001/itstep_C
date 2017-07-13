@@ -3,7 +3,6 @@
 #include<cmath>
 #define PI 3.14159265  
 
-
 Triangle::Triangle(const double a, const double b, const double c) : a(a), b(b), c(c)
 {
 	if (a < b + c && b < a + c && c < a + b && a>0 && b>0 && c>0)
@@ -23,13 +22,13 @@ Triangle::Triangle(const double a, const double b, const double c) : a(a), b(b),
 		angle_b = 0;
 		angle_c = 0;
 	}
-		
+
 }
 
 
 Triangle::Triangle(std::pair<double, double> x, const double angle) : a(x.first), b(x.second), angle_c(angle)
 {
-	c = sqrt((a*a) + (b*b) - (2 * a*b*cos(angle_c * PI/180)));
+	c = sqrt((a*a) + (b*b) - (2 * a*b*cos(angle_c * PI / 180)));
 
 	angle_a = acos(((b*b) + (c*c) - (a*a)) / (2 * b*c));
 	angle_a = angle_a * 180 / PI;
@@ -47,6 +46,32 @@ Triangle::Triangle(const double a, std::pair<double, double> x) : a(a), angle_b(
 }
 
 
+void Triangle::set_a(const double x)
+{
+	a = x;
+}
+void Triangle::set_b(const double x)
+{
+	b = x;
+}
+void Triangle::set_c(const double x)
+{
+	c = x;
+}
+void Triangle::set_angle_a(const double x)
+{
+	angle_a = x;
+}
+void Triangle::set_angle_b(const double x)
+{
+	angle_b = x;
+}
+void Triangle::set_angle_c(const double x)
+{
+	angle_c = x;
+}
+
+
 double Triangle::getArea()
 {
 
@@ -57,7 +82,7 @@ double Triangle::getArea()
 		return sqrt(p*(p - a)*(p - b)*(p - c));
 	}
 	else
-	a = 0;
+		a = 0;
 	b = 0;
 	c = 0;
 	angle_a = 0;
