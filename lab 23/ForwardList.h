@@ -1,10 +1,10 @@
 #pragma once
-
+#include<exception>
 template <typename T>
 class ForwardList {
 	struct node {
 		T data;
-		node* next;
+		node* next ;
 	};
 	node* head;
 	node* tail;
@@ -20,10 +20,10 @@ public:
 	void push_back(const T&);
 	void push_front(const T&);
 	bool insert(const T&, const T&);
-	
+
 	T pop_back();
 	T pop_front();
-	bool erase(const T&) { return true; };
+	bool erase(const T&) ;
 
 	void print();
 
@@ -32,7 +32,7 @@ private:
 	void create_first_node(const T&);
 	//node* find_node(const T&);
 	//node* find_previous_node(const T&);
-	
+
 };
 
 
@@ -56,17 +56,16 @@ typename ForwardList<T>::node * ForwardList<T>::create_node(const T& x)
 	ptr->data = x;
 	ptr->next = nullptr;
 	return ptr;
+
 }
 
 
 template<typename T>
 void ForwardList<T>::create_first_node(const T& x)
 {
-	node * ptr = new node;
-	ptr->data = x;
-	ptr->next = nullptr;
-	head = ptr->next;
-	tail = ptr->next;
+	node* tmp = create_node(x);
+	head = tmp;
+	tail = tmp;
 }
 
 
@@ -74,12 +73,19 @@ template<typename T>
 void ForwardList<T>::push_front(const T& x)
 {
 	if (empty())
+	{
+		++list_size;
 		create_first_node(x);
+	}
+		
 	else {
+		++list_size;
 		node * tmp = create_node(x);
 		tmp->next = head;
 		head = tmp;
 	}
+	
+	
 }
 
 
@@ -88,88 +94,104 @@ void ForwardList<T>::push_back(const T& x)
 {
 	if (empty())
 	{
-create_first_node(x);
+		++list_size;
+		create_first_node(x);
 	}
-		
+
 	else {
+		++list_size;
 		node * tmp = create_node(x);
 		tmp->next = nullptr;
 		tail->next = tmp;
 		tail = tmp;
 	}
+
+	
 }
+
+
+
 
 
 template<typename T>
 T ForwardList<T>::pop_front()
 {
-	if (empty())
-		std::cout << "Error";
-	else
+	if (!empty())
 	{
+		--list_size;
 		node * tmp = head;
 		T temp = tmp->data;
 		delete tmp;
 		head = head->next;
-		return temp; /*!!!*/
+		return temp; //!!!
+
 	}
-			
+	else 
+		throw std::logic_error("Error");
+
 }
 
 
 template<typename T>
 T ForwardList<T>::pop_back()
 {
-	if (empty())
-		std::cout << "Error";
-	else
-		{
+	if (!empty())
+	{
+		--list_size;
 		node * tmp = tail;
-		T temp = tmp->data;
+		T temp = tail->data;
 		delete tail;
 		tail = nullptr;
 		return temp; /*!!!!*/
 	}
+	else
+		 throw std::logic_error("Error");
 }
 
 
-/*
+
+
 template<typename T>
 bool ForwardList<T>::erase(const T& x)
 {
 	if (empty())
 	{
-		return false;
+		throw std::logic_error("Error");
 	}
+
 	else
 	{
-		node * pnot = head;
-		while (pnot->next != nullptr)
+		--list_size;
+		node* ptr = head;
+		node* tmp = ptr;
+		while (ptr->next != nullptr)
 		{
-			if (pnot->data == x)
+
+			if (ptr->data == x)
 			{
-				node * tmp = create_node(y);
-				tmp->next = pnot->next;
-				pnot->next = tmp;
+				node* temp = ptr;
+				tmp->next = ptr->next;
+				delete ptr;
 				return true;
 			}
-			else
-				return false
+			tmp = ptr;
 		}
 	}
+	return false;
 }
-*/
+
 
 
 template<typename T>
 bool ForwardList<T>::insert(const T& x, const T& y)
 {
 	if (empty())
-	{
 		return false;
-	}
+	
 	else
 	{
+
+		++list_size;
 		node * pnot = head;
 		while (pnot->next != nullptr)
 		{
@@ -180,11 +202,14 @@ bool ForwardList<T>::insert(const T& x, const T& y)
 				pnot->next = tmp;
 				return true;
 			}
-			else
-				return false;
 		}
+		return false;
 	}
+	return false;
 }
+
+
+
 
 
 
@@ -197,17 +222,14 @@ void ForwardList<T>::print()
 	}
 	else
 	{
-	node * tmp = head;
-	while (tmp->next != nullptr)
-		std::cout << tmp->data<<" ";
+		node * tmp = head;
+		while (tmp != nullptr)
+		{
+			std::cout << tmp->data << " ";
+			tmp = tmp->next;
+		}
 	}
 }
-
-
-
-
-
-
 
 
 
