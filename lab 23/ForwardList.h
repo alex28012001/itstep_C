@@ -116,13 +116,14 @@ void ForwardList<T>::push_back(const T& x)
 template<typename T>
 T ForwardList<T>::pop_front()
 {
-	if (!empty())
+	if (size()!=0)
 	{
 		--list_size;
 		node * tmp = head;
 		T temp = tmp->data;
-		delete tmp;
+		
 		head = head->next;
+		delete tmp;
 		return temp; //!!!
 
 	}
@@ -131,23 +132,31 @@ T ForwardList<T>::pop_front()
 
 }
 
-
 template<typename T>
 T ForwardList<T>::pop_back()
 {
-	if (!empty())
+	if (size() != 0)
 	{
+		node* tmp = tail;
+		T data = tmp->data;
+
+		node*ptr = head;
+		while (ptr->next != nullptr) {
+			if (ptr->next->next == nullptr) {
+				ptr->next = nullptr;
+				break;
+			}
+			ptr = ptr->next;
+		}
 		--list_size;
-		node * tmp = tail;
-		T temp = tail->data;
-		delete tail;
-		tail = nullptr;
-		return temp; /*!!!!*/
+		tail = ptr;
+		delete tmp;
+		return data;
 	}
 	else
-		 throw std::logic_error("Error");
+		throw std::logic_error("error");
+	
 }
-
 
 
 
@@ -161,7 +170,7 @@ bool ForwardList<T>::erase(const T& x)
 
 	else
 	{
-		--list_size;
+		
 		node* ptr = head;
 		node* tmp = ptr;
 		while (ptr->next != nullptr)
@@ -169,6 +178,7 @@ bool ForwardList<T>::erase(const T& x)
 
 			if (ptr->data == x)
 			{
+				--list_size;
 				node* temp = ptr;
 				tmp->next = ptr->next;
 				delete ptr;
@@ -180,6 +190,35 @@ bool ForwardList<T>::erase(const T& x)
 	return false;
 }
 
+/*
+template <typename T>
+bool ForwardList<T>::erase(const T& el) {
+	if (size() == 0){
+		throw std::logic_error("Error: size = 0");
+	}
+
+	node* cur = head;
+	node* prev = nullptr;
+	while (cur->data != el && cur != nullptr){
+		prev = cur;
+		cur = cur->next;
+	}
+
+	if (cur != nullptr){
+		if (prev != nullptr){
+			prev->next = cur->next;
+		}
+		else{
+			head = cur->next;
+		}
+		delete cur;
+		--list_size;
+		return true;
+	}
+
+	return false;
+}
+*/
 
 
 template<typename T>
@@ -187,26 +226,28 @@ bool ForwardList<T>::insert(const T& x, const T& y)
 {
 	if (empty())
 		return false;
-	
-	else
-	{
 
-		++list_size;
-		node * pnot = head;
-		while (pnot->next != nullptr)
+	
+		node * ptr = head;
+		while (ptr != nullptr)
 		{
-			if (pnot->data == x)
+			if (y == ptr->data)
 			{
-				node * tmp = create_node(y);
-				tmp->next = pnot->next;
-				pnot->next = tmp;
+				++list_size;
+				node* tmp = new node;
+				tmp->data = x;
+				tmp->next = ptr->next;
+				ptr->next = tmp;
+				if (tmp->next == nullptr)
+					tail = tmp;
 				return true;
 			}
+			ptr = ptr->next;
 		}
 		return false;
-	}
-	return false;
 }
+
+
 
 
 
