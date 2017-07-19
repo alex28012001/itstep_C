@@ -1,10 +1,11 @@
 #pragma once
 #include<exception>
 template <typename T>
-class ForwardList {
+class ForwardList 
+{
 	struct node {
 		T data;
-		node* next ;
+		node* next;
 	};
 	node* head;
 	node* tail;
@@ -12,7 +13,10 @@ class ForwardList {
 
 public:
 	ForwardList() : head(nullptr), tail(nullptr), list_size(0) {};
-	~ForwardList() {};
+	~ForwardList();
+
+	ForwardList(ForwardList  const &) = delete;
+	ForwardList & operator=(ForwardList  const &) = delete;
 
 	size_t size() const;
 	bool empty() const;
@@ -23,7 +27,7 @@ public:
 
 	T pop_back();
 	T pop_front();
-	bool erase(const T&) ;
+	bool erase(const T&);
 
 	void print();
 
@@ -34,6 +38,7 @@ private:
 	//node* find_previous_node(const T&);
 
 };
+
 
 
 template<typename T>
@@ -77,15 +82,15 @@ void ForwardList<T>::push_front(const T& x)
 		++list_size;
 		create_first_node(x);
 	}
-		
+
 	else {
 		++list_size;
 		node * tmp = create_node(x);
 		tmp->next = head;
 		head = tmp;
 	}
-	
-	
+
+
 }
 
 
@@ -97,16 +102,14 @@ void ForwardList<T>::push_back(const T& x)
 		++list_size;
 		create_first_node(x);
 	}
-
-	else {
+	else 
+	{
 		++list_size;
 		node * tmp = create_node(x);
 		tmp->next = nullptr;
 		tail->next = tmp;
 		tail = tmp;
 	}
-
-	
 }
 
 
@@ -116,109 +119,96 @@ void ForwardList<T>::push_back(const T& x)
 template<typename T>
 T ForwardList<T>::pop_front()
 {
-	if (size()!=0)
-	{
-		--list_size;
-		node * tmp = head;
-		T temp = tmp->data;
+		if (empty()) 
+			throw  std::logic_error("Empty");
 		
+		node* tmp = head;
+		T data = tmp->data;
 		head = head->next;
-		delete tmp;
-		return temp; //!!!
+		--list_size;
 
-	}
-	else 
-		throw std::logic_error("Error");
+		if (size() == 0) {
+			head = tail = nullptr;
+		}
+
+		delete tmp;
+		return data;
 
 }
 
 template<typename T>
 T ForwardList<T>::pop_back()
 {
-	if (size() != 0)
-	{
-		node* tmp = tail;
-		T data = tmp->data;
 
-		node*ptr = head;
-		while (ptr->next != nullptr) {
-			if (ptr->next->next == nullptr) {
-				ptr->next = nullptr;
-				break;
-			}
-			ptr = ptr->next;
+
+	if (size() == 0) 
+		throw std::logic_error("Empty");
+
+
+	node* tmp = tail;
+	T data = tmp->data;
+
+	node*ptr = head;
+	while (ptr->next != nullptr) {
+		if (ptr->next->next == nullptr) {
+			ptr->next = nullptr;
+			break;
 		}
-		--list_size;
-		tail = ptr;
-		delete tmp;
-		return data;
+		ptr = ptr->next;
 	}
-	else
-		throw std::logic_error("error");
-	
+
+	--list_size;
+	tail = ptr;
+
+	if (size() == 0) {
+		head = tail = nullptr;
+	}
+
+	delete tmp;
+	return data;
 }
+
 
 
 
 template<typename T>
 bool ForwardList<T>::erase(const T& x)
 {
-	if (empty())
-	{
-		throw std::logic_error("Error");
+	if (size() == 0) 
+		throw std::logic_error("Empty");
+
+	node* ptr = head;
+	node* tmp = nullptr;
+	while (ptr->data != x && ptr != nullptr) {
+		tmp = ptr;
+		ptr = ptr->next;
 	}
 
-	else
-	{
-		
-		node* ptr = head;
-		node* tmp = ptr;
-		while (ptr->next != nullptr)
-		{
-
-			if (ptr->data == x)
-			{
-				--list_size;
-				node* temp = ptr;
-				tmp->next = ptr->next;
-				delete ptr;
-				return true;
-			}
-			tmp = ptr;
+	if (ptr != nullptr) {
+		if (tmp != nullptr) {
+			tmp->next = ptr->next;
 		}
-	}
-	return false;
-}
-
-/*
-template <typename T>
-bool ForwardList<T>::erase(const T& el) {
-	if (size() == 0){
-		throw std::logic_error("Error: size = 0");
-	}
-
-	node* cur = head;
-	node* prev = nullptr;
-	while (cur->data != el && cur != nullptr){
-		prev = cur;
-		cur = cur->next;
-	}
-
-	if (cur != nullptr){
-		if (prev != nullptr){
-			prev->next = cur->next;
+		else {
+			head = ptr->next;
 		}
-		else{
-			head = cur->next;
+		if (ptr->next == nullptr && tmp != nullptr) {
+			tail = tmp;
 		}
-		delete cur;
+		delete ptr;
 		--list_size;
+
+		if (size() == 0) {
+			head = tail = nullptr;
+		}
+
 		return true;
 	}
 
 	return false;
+
 }
-*/
+
+
 
 
 template<typename T>
@@ -227,28 +217,23 @@ bool ForwardList<T>::insert(const T& x, const T& y)
 	if (empty())
 		return false;
 
-	
-		node * ptr = head;
-		while (ptr != nullptr)
+
+	node * ptr = head;
+	while (ptr != nullptr)
+	{
+		if (ptr->data == y)
 		{
-			if (y == ptr->data)
-			{
-				++list_size;
-				node* tmp = new node;
-				tmp->data = x;
-				tmp->next = ptr->next;
-				ptr->next = tmp;
-				if (tmp->next == nullptr)
-					tail = tmp;
-				return true;
-			}
-			ptr = ptr->next;
+			++list_size;
+			node* tmp = new node;
+			tmp->data = x;
+			tmp->next = ptr->next;
+			ptr->next = tmp;
+			return true;
 		}
-		return false;
+		ptr = ptr->next;
+	}
+	return false;
 }
-
-
-
 
 
 
@@ -258,19 +243,24 @@ template<typename T>
 void ForwardList<T>::print()
 {
 	if (empty())
-	{
-		std::cout << "Error";
-	}
-	else
-	{
+		std::cout << "Empty";
+	
 		node * tmp = head;
 		while (tmp != nullptr)
 		{
 			std::cout << tmp->data << " ";
 			tmp = tmp->next;
 		}
-	}
+		std::cout << std::endl;
 }
 
+
+template <typename T>
+ForwardList<T>::~ForwardList() 
+{
+	while (head) {
+		pop_front();
+	}
+}
 
 
